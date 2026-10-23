@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1f6feb">
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="icon-192.png">
+<title>Stock FabLab Clunisois</title>
+<style>
+  :root{
+    --bg:#f4f6f9; --card:#fff; --text:#1c2430; --muted:#6a7686; --line:#e1e6ee;
+    --accent:#1f6feb; --ok:#1a9a52; --low:#d98a00; --out:#d23b3b;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#10151c; --card:#19212b; --text:#e8edf3; --muted:#92a0b2; --line:#2a3544; --accent:#58a6ff; }
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);padding-bottom:80px}
+  header{background:var(--accent);color:#fff;padding:14px 16px 10px;padding-top:max(14px,env(safe-area-inset-top))}
+  header h1{margin:0;font-size:1.15rem}
+  header small{opacity:.85}
+  .tabs{display:flex;gap:6px;margin-top:10px}
+  .tab{flex:1;border:0;background:rgba(255,255,255,.18);color:#fff;padding:9px 4px;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer}
+  .tab.active{background:#fff;color:var(--accent)}
+  .tools{padding:12px 16px 0;display:grid;gap:8px}
+  .tools input[type=search],.tools select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:1rem}
+  .row{display:flex;gap:8px;align-items:center}
+  .row label{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:.9rem}
+  .count{padding:8px 16px 0;color:var(--muted);font-size:.85rem}
+  .grid{display:grid;gap:10px;padding:10px 16px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:12px;display:flex;gap:12px}
+  .swatch{width:48px;height:48px;border-radius:50%;flex:none;border:2px solid var(--line);box-shadow:inset 0 0 0 2px rgba(255,255,255,.35)}
+  .swatch.plate{border-radius:10px}
+  .info{flex:1;min-width:0}
+  .title{font-weight:700;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .sub{color:var(--muted);font-size:.85rem;margin-top:2px}
+  .qty{margin-top:8px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .qty b{font-size:1.05rem}
+  .badge{font-size:.72rem;font-weight:700;color:#fff;border-radius:999px;padding:3px 9px}
+  .badge.ok{background:var(--ok)} .badge.low{background:var(--low)} .badge.out{background:var(--out)}
+  .bar{height:6px;background:var(--line);border-radius:6px;margin-top:6px;overflow:hidden}
+  .bar i{display:block;height:100%;background:var(--ok)}
+  .bar i.low{background:var(--low)} .bar i.out{background:var(--out)}
+  .actions{display:flex;gap:6px;margin-top:8px;flex-wrap:wrap}
+  button.small{border:1px solid var(--line);background:var(--card);color:var(--text);border-radius:8px;padding:6px 10px;font-size:.85rem;cursor:pointer}
+  button.small.danger{color:var(--out)}
+  .empty{padding:40px 16px;text-align:center;color:var(--muted)}
+  footer{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
+  footer .meta{color:var(--muted);font-size:.8rem}
+  .admin-bar{display:none;gap:6px;flex-wrap:wrap}
+  body.admin .admin-bar{display:flex}
+  .btn{border:0;background:var(--accent);color:#fff;border-radius:10px;padding:9px 14px;font-weight:600;font-size:.9rem;cursor:pointer}
+  .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  .only-admin{display:none}
+  body.admin .only-admin{display:flex}
+  .draft{display:none;margin:10px 16px 0;padding:10px 12px;background:#fff4d6;color:#5c4400;border-radius:10px;font-size:.85rem}
+  .draft.show{display:block}
+  .draft button{margin-left:8px}
+  dialog{border:0;border-radius:16px;padding:0;width:min(520px,94vw);background:var(--card);color:var(--text)}
+  dialog::backdrop{background:rgba(0,0,0,.45)}
+  form.edit{padding:16px;display:grid;gap:10px}
+  form.edit h2{margin:0 0 4px;font-size:1.1rem}
+  form.edit label{display:grid;gap:4px;font-size:.85rem;color:var(--muted)}
+  form.edit input,form.edit select,form.edit textarea{padding:10px;border:1px solid var(--line);border-radius:8px;font-size:1rem;background:var(--bg);color:var(--text);width:100%}
+  form.edit input[type=color]{padding:2px;height:42px}
+  form.edit .two{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  form.edit .three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  form.edit .check{display:flex;align-items:center;gap:8px;color:var(--text)}
+  form.edit .check input{width:auto}
+  .dlg-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
+</style>
+</head>
+<body>
+<header>
+  <h1>Stock du FabLab Clunisois</h1>
+  <small id="updated">Chargement…</small>
+  <div class="tabs" id="tabs"></div>
+</header>
+
+<div class="draft" id="draft">Modifications locales non publiées.
+  <button class="small" id="discardDraft">Annuler le brouillon</button>
+</div>
+
+<div class="tools">
+  <input type="search" id="q" placeholder="Rechercher (matériau, couleur, marque…)">
+  <div class="row">
+    <select id="material"></select>
+    <label><input type="checkbox" id="onlyAvail"> Disponible</label>
+  </div>
+</div>
+<div class="count" id="count"></div>
+<main class="grid" id="list"></main>
+
+<footer>
+  <span class="meta"><a href="#" id="toggleAdmin" style="color:inherit">Mode gestionnaire</a></span>
+  <div class="admin-bar">
+    <button class="btn" id="add">+ Ajouter</button>
+    <button class="btn ghost" id="export">Exporter stock.json</button>
+    <button class="btn ghost" id="import">Importer</button>
+    <input type="file" id="file" accept="application/json" hidden>
+  </div>
+</footer>
+
+<dialog id="dlg">
+  <form class="edit" id="form" method="dialog">
+    <h2 id="dlgTitle">Article</h2>
+    <label>Catégorie
+      <select name="category">
+        <option value="filament">Filament</option>
+        <option value="resine">Résine</option>
+        <option value="plaque">Plaque laser</option>
+      </select>
+    </label>
+    <div class="two">
+      <label>Matériau / type <input name="material" list="materials" required placeholder="PLA, PETG, Standard…"></label>
+      <label>Marque / nom <input name="name" placeholder="Prusament, Elegoo…"></label>
+    </div>
+    <div class="two">
+      <label>Couleur <input type="color" name="color" value="#888888"></label>
+      <label id="color2wrap" style="display:none">Couleur 2 <input type="color" name="color2" value="#ffffff"></label>
+    </div>
+    <label class="check"><input type="checkbox" name="bicolor"> Double couleur</label>
+    <div class="two">
+      <label><span id="qtyLabel">Quantité (g)</span> <input type="number" name="quantity" min="0" step="any" required></label>
+      <label>Seuil « faible » <input type="number" name="low" min="0" step="any" placeholder="auto"></label>
+    </div>
+    <div class="three" id="dims">
+      <label>Longueur (mm) <input type="number" name="width" min="0" step="any"></label>
+      <label>Largeur (mm) <input type="number" name="height" min="0" step="any"></label>
+      <label>Épaisseur (mm) <input type="number" name="thickness" min="0" step="any"></label>
+    </div>
+    <label>Emplacement <input name="location" placeholder="Étagère A, bac 2…"></label>
+    <label>Note <textarea name="note" rows="2"></textarea></label>
+    <div class="dlg-actions">
+      <button type="button" class="btn ghost" id="cancel">Annuler</button>
+      <button class="btn" value="save">Enregistrer</button>
+    </div>
+  </form>
+</dialog>
+<datalist id="materials"></datalist>
+
+<script>
+const CATS = {
+  filament:{label:'Filaments', unit:'g',   low:200, step:50, full:1000},
+  resine:  {label:'Résines',   unit:'mL',  low:250, step:50, full:1000},
+  plaque:  {label:'Plaques laser', unit:'pcs', low:2, step:1, full:10}
+};
+const DRAFT_KEY='fablab-stock-draft';
+const state={data:{updated:'',items:[]},cat:'filament',q:'',material:'',onlyAvail:false,admin:false,fromDraft:false,editId:null};
+const $=id=>document.getElementById(id);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=n=>Number(n).toLocaleString('fr-FR',{maximumFractionDigits:1});
+
+async function load(){
+  try{
+    const r=await fetch('stock.json?'+Date.now(),{cache:'no-store'});
+    if(!r.ok) throw new Error(r.status);
+    state.data=await r.json();
+  }catch(e){
+    $('updated').textContent='Impossible de charger stock.json';
+  }
+  try{
+    const d=localStorage.getItem(DRAFT_KEY);
+    if(d){ state.data=JSON.parse(d); state.fromDraft=true; }
+  }catch(e){}
+  render();
+}
+
+function saveDraft(){
+  state.data.updated=new Date().toISOString();
+  try{ localStorage.setItem(DRAFT_KEY,JSON.stringify(state.data)); state.fromDraft=true; }catch(e){}
+  render();
+}
+
+function status(it){
+  const c=CATS[it.category]; const q=Number(it.quantity)||0;
+  const low=(it.low!==undefined&&it.low!==''&&it.low!==null)?Number(it.low):c.low;
+  if(q<=0) return 'out';
+  if(q<=low) return 'low';
+  return 'ok';
+}
+const LABEL={ok:'Disponible',low:'Stock faible',out:'Épuisé'};
+
+function swatch(it){
+  const a=it.color||'#888';
+  const bg=it.color2?`linear-gradient(135deg, ${esc(a)} 50%, ${esc(it.color2)} 50%)`:esc(a);
+  return `<div class="swatch ${it.category==='plaque'?'plate':''}" style="background:${bg}"></div>`;
+}
+
+function dimsText(it){
+  if(it.category!=='plaque') return '';
+  const p=[];
+  if(it.width&&it.height) p.push(`${fmt(it.width)}×${fmt(it.height)} mm`);
+  if(it.thickness) p.push(`ép. ${fmt(it.thickness)} mm`);
+  return p.join(' · ');
+}
+
+function render(){
+  // onglets
+  $('tabs').innerHTML=Object.entries(CATS).map(([k,c])=>
+    `<button class="tab ${k===state.cat?'active':''}" data-cat="${k}">${c.label}</button>`).join('');
+  // dates
+  $('updated').textContent=state.data.updated?('Mis à jour le '+new Date(state.data.updated).toLocaleDateString('fr-FR')):'';
+  $('draft').classList.toggle('show',state.fromDraft);
+
+  const inCat=state.data.items.filter(i=>i.category===state.cat);
+  // filtre matériau
+  const mats=[...new Set(inCat.map(i=>i.material).filter(Boolean))].sort();
+  const sel=$('material');
+  sel.innerHTML='<option value="">Tous les matériaux</option>'+mats.map(m=>`<option ${m===state.material?'selected':''}>${esc(m)}</option>`).join('');
+  if(state.material&&!mats.includes(state.material)) state.material='';
+  // datalist
+  $('materials').innerHTML=[...new Set(state.data.items.map(i=>i.material).filter(Boolean))].sort().map(m=>`<option value="${esc(m)}">`).join('');
+
+  const q=state.q.trim().toLowerCase();
+  let items=inCat.filter(i=>{
+    if(state.material&&i.material!==state.material) return false;
+    if(state.onlyAvail&&status(i)==='out') return false;
+    if(q){
+      const hay=[i.material,i.name,i.location,i.note,i.colorName].join(' ').toLowerCase();
+      if(!hay.includes(q)) return false;
+    }
+    return true;
+  }).sort((a,b)=>(a.material||'').localeCompare(b.material||'')||(a.name||'').localeCompare(b.name||''));
+
+  $('count').textContent=`${items.length} article${items.length>1?'s':''}`;
+  if(!items.length){ $('list').innerHTML='<div class="empty">Aucun article.</div>'; return; }
+
+  $('list').innerHTML=items.map(it=>{
+    const c=CATS[it.category]; const st=status(it);
+    const pct=Math.max(0,Math.min(100,(Number(it.quantity)||0)/c.full*100));
+    const dims=dimsText(it);
+    return `<article class="card">
+      ${swatch(it)}
+      <div class="info">
+        <div class="title">${esc(it.material)}${it.name?' · '+esc(it.name):''}</div>
+        <div class="sub">${[dims,it.location&&('📍 '+esc(it.location))].filter(Boolean).join(' · ')}</div>
+        ${it.note?`<div class="sub">${esc(it.note)}</div>`:''}
+        <div class="qty"><b>${fmt(it.quantity||0)} ${c.unit}</b><span class="badge ${st}">${LABEL[st]}</span></div>
+        ${it.category!=='plaque'?`<div class="bar"><i class="${st}" style="width:${pct}%"></i></div>`:''}
+        <div class="actions only-admin">
+          <button class="small" data-act="minus" data-id="${esc(it.id)}">− ${c.step}</button>
+          <button class="small" data-act="plus" data-id="${esc(it.id)}">+ ${c.step}</button>
+          <button class="small" data-act="edit" data-id="${esc(it.id)}">Modifier</button>
+          <button class="small danger" data-act="del" data-id="${esc(it.id)}">Suppr.</button>
+        </div>
+      </div>
+    </article>`;
+  }).join('');
+}
+
+/* ---------- événements ---------- */
+$('tabs').addEventListener('click',e=>{
+  const b=e.target.closest('[data-cat]'); if(!b) return;
+  state.cat=b.dataset.cat; state.material=''; render();
+});
+$('q').addEventListener('input',e=>{state.q=e.target.value;render();});
+$('material').addEventListener('change',e=>{state.material=e.target.value;render();});
+$('onlyAvail').addEventListener('change',e=>{state.onlyAvail=e.target.checked;render();});
+$('toggleAdmin').addEventListener('click',e=>{
+  e.preventDefault(); state.admin=!state.admin;
+  document.body.classList.toggle('admin',state.admin);
+  e.target.textContent=state.admin?'Quitter le mode gestionnaire':'Mode gestionnaire';
+});
+$('discardDraft').addEventListener('click',()=>{
+  if(!confirm('Abandonner toutes les modifications locales ?')) return;
+  try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
+  state.fromDraft=false; load();
+});
+
+$('list').addEventListener('click',e=>{
+  const b=e.target.closest('[data-act]'); if(!b) return;
+  const it=state.data.items.find(i=>i.id===b.dataset.id); if(!it) return;
+  const step=CATS[it.category].step;
+  if(b.dataset.act==='minus'){ it.quantity=Math.max(0,(Number(it.quantity)||0)-step); saveDraft(); }
+  if(b.dataset.act==='plus'){ it.quantity=(Number(it.quantity)||0)+step; saveDraft(); }
+  if(b.dataset.act==='edit') openDialog(it);
+  if(b.dataset.act==='del'){
+    if(confirm('Supprimer cet article ?')){
+      state.data.items=state.data.items.filter(i=>i.id!==it.id); saveDraft();
+    }
+  }
+});
+
+/* ---------- formulaire ---------- */
+const form=$('form');
+function syncForm(){
+  const cat=form.category.value;
+  $('qtyLabel').textContent=`Quantité (${CATS[cat].unit})`;
+  $('dims').style.display=cat==='plaque'?'grid':'none';
+  $('color2wrap').style.display=form.bicolor.checked?'grid':'none';
+}
+form.category.addEventListener('change',syncForm);
+form.bicolor.addEventListener('change',syncForm);
+
+function openDialog(it){
+  state.editId=it?it.id:null;
+  $('dlgTitle').textContent=it?'Modifier l\'article':'Nouvel article';
+  form.reset();
+  form.category.value=it?.category||state.cat;
+  form.material.value=it?.material||'';
+  form.name.value=it?.name||'';
+  form.color.value=it?.color||'#888888';
+  form.bicolor.checked=!!it?.color2;
+  form.color2.value=it?.color2||'#ffffff';
+  form.quantity.value=it?.quantity??'';
+  form.low.value=it?.low??'';
+  form.width.value=it?.width??'';
+  form.height.value=it?.height??'';
+  form.thickness.value=it?.thickness??'';
+  form.location.value=it?.location||'';
+  form.note.value=it?.note||'';
+  syncForm();
+  $('dlg').showModal();
+}
+$('add').addEventListener('click',()=>openDialog(null));
+$('cancel').addEventListener('click',()=>$('dlg').close());
+form.addEventListener('submit',e=>{
+  const num=v=>v===''?undefined:Number(v);
+  const obj={
+    id:state.editId||('i'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)),
+    category:form.category.value,
+    material:form.material.value.trim(),
+    name:form.name.value.trim()||undefined,
+    color:form.color.value,
+    color2:form.bicolor.checked?form.color2.value:undefined,
+    quantity:Number(form.quantity.value)||0,
+    low:num(form.low.value),
+    location:form.location.value.trim()||undefined,
+    note:form.note.value.trim()||undefined
+  };
+  if(obj.category==='plaque'){
+    obj.width=num(form.width.value); obj.height=num(form.height.value); obj.thickness=num(form.thickness.value);
+  }
+  const clean=JSON.parse(JSON.stringify(obj)); // retire les undefined
+  const idx=state.data.items.findIndex(i=>i.id===clean.id);
+  if(idx>=0) state.data.items[idx]=clean; else state.data.items.push(clean);
+  state.cat=clean.category;
+  saveDraft();
+});
+
+/* ---------- export / import ---------- */
+$('export').addEventListener('click',()=>{
+  state.data.updated=new Date().toISOString();
+  const blob=new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob); a.download='stock.json'; a.click();
+  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
+  alert('stock.json téléchargé.\nRemplace le fichier dans ton dépôt GitHub (Add file → Upload files) pour publier la mise à jour.');
+});
+$('import').addEventListener('click',()=>$('file').click());
+$('file').addEventListener('change',async e=>{
+  const f=e.target.files[0]; if(!f) return;
+  try{
+    const j=JSON.parse(await f.text());
+    if(!Array.isArray(j.items)) throw new Error('format');
+    state.data=j; saveDraft();
+  }catch(err){ alert('Fichier invalide.'); }
+  e.target.value='';
+});
+
+if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }
+load();
+</script>
+</body>
+</html>

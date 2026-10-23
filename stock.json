@@ -1,0 +1,12 @@
+{
+  "updated": "2026-10-23T10:00:00.000Z",
+  "items": [
+    { "id": "f1", "category": "filament", "material": "PLA", "name": "Exemple Noir", "color": "#222222", "quantity": 850, "location": "Étagère A" },
+    { "id": "f2", "category": "filament", "material": "PLA", "name": "Exemple Bicolore", "color": "#e63946", "color2": "#1d3557", "quantity": 120, "location": "Étagère A", "note": "Dégradé rouge/bleu" },
+    { "id": "f3", "category": "filament", "material": "PETG", "name": "Exemple Transparent", "color": "#cfe8f3", "quantity": 0, "location": "Étagère B" },
+    { "id": "r1", "category": "resine", "material": "Standard", "name": "Exemple Grise", "color": "#9aa0a6", "quantity": 700, "location": "Armoire résine" },
+    { "id": "r2", "category": "resine", "material": "Tough", "name": "Exemple Claire", "color": "#f1e9c6", "quantity": 180, "location": "Armoire résine" },
+    { "id": "p1", "category": "plaque", "material": "Contreplaqué", "name": "Peuplier", "color": "#d9b382", "quantity": 8, "width": 600, "height": 400, "thickness": 3, "location": "Rack laser" },
+    { "id": "p2", "category": "plaque", "material": "PMMA", "name": "Exemple Rouge", "color": "#d62828", "quantity": 1, "width": 300, "height": 200, "thickness": 5, "location": "Rack laser" }
+  ]
+}

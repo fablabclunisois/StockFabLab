@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T14:02:49.625Z",
+  "updated": "2026-10-23T14:06:19.952Z",
   "items": [
     {
       "id": "f002",
@@ -167,17 +167,6 @@
       "pack": 750
     },
     {
-      "id": "f022",
-      "category": "filament",
-      "material": "PETG",
-      "colorName": "Gris",
-      "color": "#8c9199",
-      "name": "Ultimaker",
-      "diameter": 2.85,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
       "id": "f023",
       "category": "filament",
       "material": "PLA",
@@ -299,39 +288,6 @@
       "pack": 1000
     },
     {
-      "id": "f039",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Doré",
-      "color": "#d4af37",
-      "name": "EmotionTech",
-      "diameter": 2.85,
-      "quantity": 1000,
-      "pack": 1000
-    },
-    {
-      "id": "f040",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Bleu foncé",
-      "color": "#1c3b73",
-      "name": "FormFutura",
-      "diameter": 2.85,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
-      "id": "f041",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Noir",
-      "color": "#1f1f1f",
-      "name": "FormFutura",
-      "diameter": 2.85,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
       "id": "f042",
       "category": "filament",
       "material": "PLA",
@@ -414,17 +370,6 @@
       "material": "Support",
       "colorName": "Naturelle",
       "color": "#e9dfc4",
-      "name": "Ultimaker",
-      "diameter": 2.85,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
-      "id": "f050",
-      "category": "filament",
-      "material": "Tough PLA",
-      "colorName": "Rouge",
-      "color": "#d62828",
       "name": "Ultimaker",
       "diameter": 2.85,
       "quantity": 750,
@@ -1587,7 +1532,7 @@
       "material": "PLA",
       "name": "PolyLite",
       "colorName": "Blanc",
-      "color": "#888888",
+      "color": "#ffffff",
       "quantity": 9000,
       "pack": 3000
     },

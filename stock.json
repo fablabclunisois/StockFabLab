@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T13:59:37.681Z",
+  "updated": "2026-10-23T14:02:49.625Z",
   "items": [
     {
       "id": "f002",
@@ -1599,6 +1599,17 @@
       "color": "#888888",
       "quantity": 1000,
       "pack": 1000,
+      "diameter": 2.85
+    },
+    {
+      "id": "imvl1hvajti7",
+      "category": "filament",
+      "material": "PETG",
+      "name": "Iconic",
+      "colorName": "Transparent",
+      "color": "#ffffff",
+      "quantity": 750,
+      "pack": 750,
       "diameter": 2.85
     }
   ]

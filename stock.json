@@ -1,38 +1,16 @@
 {
-  "updated": "2026-10-23T13:46:32.206Z",
+  "updated": "2026-10-23T13:48:29.801Z",
   "items": [
-    {
-      "id": "f001",
-      "category": "filament",
-      "material": "316L",
-      "colorName": "Naturelle",
-      "color": "#e9dfc4",
-      "name": "Nanovia",
-      "diameter": 1.75,
-      "quantity": 500,
-      "pack": 500
-    },
     {
       "id": "f002",
       "category": "filament",
       "material": "316L",
-      "colorName": "Naturelle",
-      "color": "#e9dfc4",
       "name": "Nanovia",
-      "diameter": 2.85,
-      "quantity": 0,
-      "pack": 1000
-    },
-    {
-      "id": "f003",
-      "category": "filament",
-      "material": "316L",
       "colorName": "Naturelle",
-      "color": "#e9dfc4",
-      "name": "BASF",
-      "diameter": 2.85,
-      "quantity": 1000,
-      "pack": 1000
+      "color": "#404040",
+      "quantity": 1500,
+      "pack": 500,
+      "diameter": 2.85
     },
     {
       "id": "f004",

@@ -64,10 +64,11 @@ Sans ce jeton, personne ne peut rien changer : c'est GitHub qui refuse l'écritu
 ```
 
 - `category` : `filament` (g), `resine` (mL) ou `plaque` (pièces)
-- `color2` : optionnel, pour les doubles couleurs
+- `colorName` : nom de la couleur affiché (ex. « Rouge », « Orange / Transparent ») ; `color` et `color2` : teintes de la pastille (la 2e pour les doubles couleurs)
+- `diameter` : diamètre du filament en mm (1.75 ou 2.85)
 - `pack` : optionnel, conditionnement d'achat utilisé par les boutons − / + (défaut : 1000)
 - `low` : optionnel, seuil « stock faible » (défauts : 200 g, 250 mL, 2 plaques)
 
-## Passer d'Excel à `stock.json`
+## Données de départ
 
-Envoie les fichiers Excel actuels à Claude pour obtenir un script de conversion vers ce format.
+`stock.json` a été généré à partir des fichiers Excel FDM, SLA et découpe laser. Les teintes des pastilles sont approximatives : tu peux les ajuster dans l'appli (champ « Pastille »).

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T09:43:23.000Z",
+  "updated": "2026-10-23T10:17:53.357Z",
   "items": [
     {
       "id": "f001",
@@ -405,7 +405,7 @@
       "color": "#1f1f1f",
       "name": "Elegoo",
       "diameter": 1.75,
-      "quantity": 0,
+      "quantity": 5000,
       "pack": 5000
     },
     {

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T10:17:53.357Z",
+  "updated": "2026-10-23T13:46:32.206Z",
   "items": [
     {
       "id": "f001",
@@ -255,70 +255,15 @@
       "pack": 1000
     },
     {
-      "id": "f024",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Blanc",
-      "color": "#f7f7f5",
-      "name": "PolyLite",
-      "diameter": 1.75,
-      "quantity": 1000,
-      "pack": 1000
-    },
-    {
-      "id": "f025",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Violet Lavande",
-      "color": "#b9a3dc",
-      "name": "PolyMaker",
-      "diameter": 1.75,
-      "quantity": 1000,
-      "pack": 1000
-    },
-    {
-      "id": "f026",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Jaune Savane",
-      "color": "#d8b24a",
-      "name": "PolyMaker",
-      "diameter": 1.75,
-      "quantity": 1000,
-      "pack": 1000
-    },
-    {
-      "id": "f027",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Blanc Cotton",
-      "color": "#f5f1e8",
-      "name": "PolyMaker",
-      "diameter": 1.75,
-      "quantity": 1000,
-      "pack": 1000
-    },
-    {
-      "id": "f028",
-      "category": "filament",
-      "material": "PLA",
-      "colorName": "Noir Charbon",
-      "color": "#26272b",
-      "name": "PolyMaker",
-      "diameter": 1.75,
-      "quantity": 2000,
-      "pack": 1000
-    },
-    {
       "id": "f029",
       "category": "filament",
       "material": "PLA",
+      "name": "PolyTerra",
       "colorName": "Gris Fossile",
       "color": "#6e7175",
-      "name": "PolyMaker",
-      "diameter": 1.75,
       "quantity": 1000,
-      "pack": 1000
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f030",
@@ -339,7 +284,7 @@
       "color": "#7e3fa8",
       "name": "Kexcelled",
       "diameter": 1.75,
-      "quantity": 2000,
+      "quantity": 3000,
       "pack": 1000
     },
     {
@@ -350,7 +295,7 @@
       "color": "#f2cf1d",
       "name": "Kexcelled",
       "diameter": 1.75,
-      "quantity": 2000,
+      "quantity": 3000,
       "pack": 1000
     },
     {
@@ -361,7 +306,7 @@
       "color": "#f7f7f5",
       "name": "Kexcelled",
       "diameter": 1.75,
-      "quantity": 1000,
+      "quantity": 3000,
       "pack": 1000
     },
     {
@@ -372,7 +317,7 @@
       "color": "#1f1f1f",
       "name": "Kexcelled",
       "diameter": 1.75,
-      "quantity": 1000,
+      "quantity": 3000,
       "pack": 1000
     },
     {
@@ -1701,6 +1646,16 @@
       "width": 300,
       "height": 200,
       "thickness": 8
+    },
+    {
+      "id": "imvl0wlsr2vk",
+      "category": "filament",
+      "material": "PLA",
+      "name": "PolyLite",
+      "colorName": "Blanc",
+      "color": "#888888",
+      "quantity": 9000,
+      "pack": 3000
     }
   ]
 }

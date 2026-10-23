@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T13:52:02.533Z",
+  "updated": "2026-10-23T13:59:37.681Z",
   "items": [
     {
       "id": "f002",
@@ -134,17 +134,6 @@
       "pack": 750
     },
     {
-      "id": "f017",
-      "category": "filament",
-      "material": "ABS-PA430",
-      "colorName": "Ivoire",
-      "color": "#f2ead0",
-      "name": "Stratasys",
-      "diameter": 1.75,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
       "id": "f018",
       "category": "filament",
       "material": "ABS-PA430",
@@ -156,26 +145,15 @@
       "pack": 750
     },
     {
-      "id": "f019",
-      "category": "filament",
-      "material": "ABS-PA430",
-      "colorName": "Blanc",
-      "color": "#f7f7f5",
-      "name": "Stratasys",
-      "diameter": 1.75,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
       "id": "f020",
       "category": "filament",
       "material": "ABS-PA430",
-      "colorName": "Noir",
-      "color": "#1f1f1f",
       "name": "Stratasys",
-      "diameter": 1.75,
-      "quantity": 750,
-      "pack": 750
+      "colorName": "Bleu",
+      "color": "#0000ff",
+      "quantity": 1500,
+      "pack": 750,
+      "diameter": 1.75
     },
     {
       "id": "f021",
@@ -427,7 +405,7 @@
       "color": "#e9dfc4",
       "name": "Stratasys",
       "diameter": 1.75,
-      "quantity": 3000,
+      "quantity": 2250,
       "pack": 750
     },
     {

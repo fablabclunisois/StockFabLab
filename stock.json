@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T13:48:29.801Z",
+  "updated": "2026-10-23T13:52:02.533Z",
   "items": [
     {
       "id": "f002",
@@ -42,7 +42,7 @@
       "color": "#34373b",
       "name": "EmotionTech",
       "diameter": 2.85,
-      "quantity": 2000,
+      "quantity": 1000,
       "pack": 1000
     },
     {
@@ -123,33 +123,11 @@
       "pack": 750
     },
     {
-      "id": "f014",
-      "category": "filament",
-      "material": "ABS",
-      "colorName": "Rouge",
-      "color": "#d62828",
-      "name": "Ultimaker",
-      "diameter": 2.85,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
       "id": "f015",
       "category": "filament",
       "material": "ABS",
       "colorName": "Noir",
       "color": "#1f1f1f",
-      "name": "Ultimaker",
-      "diameter": 2.85,
-      "quantity": 750,
-      "pack": 750
-    },
-    {
-      "id": "f016",
-      "category": "filament",
-      "material": "ABS",
-      "colorName": "Bleu",
-      "color": "#1e6fd9",
       "name": "Ultimaker",
       "diameter": 2.85,
       "quantity": 750,
@@ -1634,6 +1612,16 @@
       "color": "#888888",
       "quantity": 9000,
       "pack": 3000
+    },
+    {
+      "id": "imvl11gli5oq",
+      "category": "filament",
+      "material": "316L",
+      "name": "BASF",
+      "color": "#888888",
+      "quantity": 1000,
+      "pack": 1000,
+      "diameter": 2.85
     }
   ]
 }

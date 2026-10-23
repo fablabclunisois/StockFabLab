@@ -17,7 +17,7 @@
     :root{ --bg:#10151c; --card:#19212b; --text:#e8edf3; --muted:#92a0b2; --line:#2a3544; --accent:#58a6ff; }
   }
   *{box-sizing:border-box}
-  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);padding-bottom:80px}
+  body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);padding-bottom:84px}
   header{background:var(--accent);color:#fff;padding:14px 16px 10px;padding-top:max(14px,env(safe-area-inset-top))}
   header h1{margin:0;font-size:1.15rem}
   header small{opacity:.85}
@@ -49,19 +49,25 @@
   .empty{padding:40px 16px;text-align:center;color:var(--muted)}
   footer{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:1px solid var(--line);padding:8px 16px;padding-bottom:max(8px,env(safe-area-inset-bottom));display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}
   footer .meta{color:var(--muted);font-size:.8rem}
+  footer .meta a{color:inherit}
   .admin-bar{display:none;gap:6px;flex-wrap:wrap}
   body.admin .admin-bar{display:flex}
   .btn{border:0;background:var(--accent);color:#fff;border-radius:10px;padding:9px 14px;font-weight:600;font-size:.9rem;cursor:pointer}
   .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+  .btn:disabled{opacity:.45;cursor:default}
   .only-admin{display:none}
   body.admin .only-admin{display:flex}
   .draft{display:none;margin:10px 16px 0;padding:10px 12px;background:#fff4d6;color:#5c4400;border-radius:10px;font-size:.85rem}
   .draft.show{display:block}
   .draft button{margin-left:8px}
+  #toast{position:fixed;left:50%;bottom:90px;transform:translateX(-50%);background:#1c2430;color:#fff;padding:10px 16px;border-radius:10px;font-size:.9rem;max-width:90vw;opacity:0;pointer-events:none;transition:opacity .25s;z-index:50;text-align:center}
+  #toast.show{opacity:1}
   dialog{border:0;border-radius:16px;padding:0;width:min(520px,94vw);background:var(--card);color:var(--text)}
   dialog::backdrop{background:rgba(0,0,0,.45)}
   form.edit{padding:16px;display:grid;gap:10px}
   form.edit h2{margin:0 0 4px;font-size:1.1rem}
+  form.edit p.help{margin:0;font-size:.82rem;color:var(--muted);line-height:1.4}
+  form.edit p.err{margin:0;font-size:.85rem;color:var(--out);display:none}
   form.edit label{display:grid;gap:4px;font-size:.85rem;color:var(--muted)}
   form.edit input,form.edit select,form.edit textarea{padding:10px;border:1px solid var(--line);border-radius:8px;font-size:1rem;background:var(--bg);color:var(--text);width:100%}
   form.edit input[type=color]{padding:2px;height:42px}
@@ -79,8 +85,8 @@
   <div class="tabs" id="tabs"></div>
 </header>
 
-<div class="draft" id="draft">Modifications locales non publiées.
-  <button class="small" id="discardDraft">Annuler le brouillon</button>
+<div class="draft" id="draft">Modifications non publiées.
+  <button class="small" id="discardDraft">Annuler les modifications</button>
 </div>
 
 <div class="tools">
@@ -94,15 +100,16 @@
 <main class="grid" id="list"></main>
 
 <footer>
-  <span class="meta"><a href="#" id="toggleAdmin" style="color:inherit">Mode gestionnaire</a></span>
+  <span class="meta" id="metaLeft"></span>
   <div class="admin-bar">
     <button class="btn" id="add">+ Ajouter</button>
-    <button class="btn ghost" id="export">Exporter stock.json</button>
-    <button class="btn ghost" id="import">Importer</button>
-    <input type="file" id="file" accept="application/json" hidden>
+    <button class="btn" id="publish" disabled>Publier</button>
+    <button class="btn ghost" id="logout">Déconnexion</button>
   </div>
 </footer>
+<div id="toast"></div>
 
+<!-- Fiche article -->
 <dialog id="dlg">
   <form class="edit" id="form" method="dialog">
     <h2 id="dlgTitle">Article</h2>
@@ -126,6 +133,7 @@
       <label><span id="qtyLabel">Quantité (g)</span> <input type="number" name="quantity" min="0" step="any" required></label>
       <label>Seuil « faible » <input type="number" name="low" min="0" step="any" placeholder="auto"></label>
     </div>
+    <label id="packwrap">Conditionnement d'achat (<span id="packUnit">g</span> par unité) <input type="number" name="pack" min="0" step="any" placeholder="1000"></label>
     <div class="three" id="dims">
       <label>Longueur (mm) <input type="number" name="width" min="0" step="any"></label>
       <label>Largeur (mm) <input type="number" name="height" min="0" step="any"></label>
@@ -139,41 +147,138 @@
     </div>
   </form>
 </dialog>
+
+<!-- Connexion gestionnaire -->
+<dialog id="dlgGh">
+  <form class="edit" id="ghForm" autocomplete="off">
+    <h2>Connexion gestionnaire</h2>
+    <p class="help">Réservé au responsable du FabLab. Le jeton GitHub reste uniquement dans ce navigateur ; sans lui, il est impossible de modifier le stock.</p>
+    <label>Dépôt GitHub <input name="repo" required placeholder="mon-compte/fablab-stock"></label>
+    <label>Branche <input name="branch" placeholder="main"></label>
+    <label>Jeton d'accès <input name="token" type="password" required autocomplete="off" placeholder="github_pat_…"></label>
+    <p class="err" id="ghErr"></p>
+    <div class="dlg-actions">
+      <button type="button" class="btn ghost" id="ghCancel">Annuler</button>
+      <button class="btn" id="ghOk">Se connecter</button>
+    </div>
+  </form>
+</dialog>
 <datalist id="materials"></datalist>
 
 <script>
 const CATS = {
-  filament:{label:'Filaments', unit:'g',   low:200, step:50, full:1000},
-  resine:  {label:'Résines',   unit:'mL',  low:250, step:50, full:1000},
+  filament:{label:'Filaments', unit:'g',   low:200, step:1000, full:1000},
+  resine:  {label:'Résines',   unit:'mL',  low:250, step:1000, full:1000},
   plaque:  {label:'Plaques laser', unit:'pcs', low:2, step:1, full:10}
 };
 const DRAFT_KEY='fablab-stock-draft';
-const state={data:{updated:'',items:[]},cat:'filament',q:'',material:'',onlyAvail:false,admin:false,fromDraft:false,editId:null};
+const CFG_KEY='fablab-gh';
+const state={data:{updated:'',items:[]},cat:'filament',q:'',material:'',onlyAvail:false,
+  admin:false,dirty:false,editId:null,sha:null,cfg:null};
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const fmt=n=>Number(n).toLocaleString('fr-FR',{maximumFractionDigits:1});
+// Pas des boutons − / + : conditionnement d'achat (1000 g / 1000 mL par défaut, modifiable par article)
+const packOf=it=>Number(it.pack)>0?Number(it.pack):CATS[it.category].step;
 
+let toastTimer;
+function toast(msg){
+  const t=$('toast'); t.textContent=msg; t.classList.add('show');
+  clearTimeout(toastTimer); toastTimer=setTimeout(()=>t.classList.remove('show'),4500);
+}
+
+/* ---------- GitHub (écriture réservée au détenteur du jeton) ---------- */
+const getCfg=()=>{try{return JSON.parse(localStorage.getItem(CFG_KEY))||null;}catch(e){return null;}};
+const toB64=s=>{const b=new TextEncoder().encode(s);let bin='';for(let i=0;i<b.length;i++)bin+=String.fromCharCode(b[i]);return btoa(bin);};
+const fromB64=s=>{const bin=atob(s.replace(/\s/g,''));return new TextDecoder().decode(Uint8Array.from(bin,c=>c.charCodeAt(0)));};
+const gh=(cfg,path,opts={})=>fetch('https://api.github.com/repos/'+cfg.repo+path,{
+  ...opts,
+  headers:{'Accept':'application/vnd.github+json','X-GitHub-Api-Version':'2022-11-28','Authorization':'Bearer '+cfg.token,...(opts.headers||{})}
+});
+function errMsg(e){
+  const m=String(e&&e.message||e);
+  if(m==='auth') return 'Jeton invalide, expiré ou sans accès à ce dépôt.';
+  if(m==='notfound') return 'Dépôt ou fichier stock.json introuvable (vérifie le nom du dépôt et la branche).';
+  if(m==='conflit') return 'Le stock a été modifié ailleurs entre-temps. Recharge la page : tes modifications sont gardées.';
+  if(m==='write') return 'Ce jeton n\'a pas le droit d\'écrire (permission « Contents : Read and write » manquante).';
+  return 'Erreur réseau ou GitHub ('+m+').';
+}
+async function fetchRemote(cfg){
+  const r=await gh(cfg,'/contents/stock.json?ref='+encodeURIComponent(cfg.branch||'main')+'&t='+Date.now(),{cache:'no-store'});
+  if(r.status===401||r.status===403) throw new Error('auth');
+  if(r.status===404) throw new Error('notfound');
+  if(!r.ok) throw new Error('HTTP '+r.status);
+  const j=await r.json();
+  return {data:JSON.parse(fromB64(j.content)),sha:j.sha};
+}
+
+/* ---------- chargement ---------- */
 async function load(){
-  try{
-    const r=await fetch('stock.json?'+Date.now(),{cache:'no-store'});
-    if(!r.ok) throw new Error(r.status);
-    state.data=await r.json();
-  }catch(e){
-    $('updated').textContent='Impossible de charger stock.json';
+  state.cfg=getCfg(); state.admin=false; state.sha=null; state.dirty=false;
+  let remote=null;
+  if(state.cfg&&state.cfg.token){
+    try{ remote=await fetchRemote(state.cfg); }
+    catch(e){ toast(errMsg(e)); }
   }
-  try{
-    const d=localStorage.getItem(DRAFT_KEY);
-    if(d){ state.data=JSON.parse(d); state.fromDraft=true; }
-  }catch(e){}
+  if(remote){
+    state.data=remote.data; state.sha=remote.sha; state.admin=true;
+    try{
+      const d=JSON.parse(localStorage.getItem(DRAFT_KEY)||'null');
+      if(d&&d.data){
+        if(d.base===remote.sha||confirm('Le stock publié a changé depuis tes dernières modifications locales.\n\nOK = garder tes modifications locales\nAnnuler = repartir de la version publiée')){
+          state.data=d.data; state.dirty=true;
+        }else{
+          localStorage.removeItem(DRAFT_KEY);
+        }
+      }
+    }catch(e){}
+  }else{
+    try{
+      const r=await fetch('stock.json?'+Date.now(),{cache:'no-store'});
+      if(!r.ok) throw new Error(r.status);
+      state.data=await r.json();
+    }catch(e){
+      $('updated').textContent='Impossible de charger stock.json';
+    }
+  }
+  document.body.classList.toggle('admin',state.admin);
   render();
 }
 
 function saveDraft(){
-  state.data.updated=new Date().toISOString();
-  try{ localStorage.setItem(DRAFT_KEY,JSON.stringify(state.data)); state.fromDraft=true; }catch(e){}
+  state.dirty=true;
+  try{ localStorage.setItem(DRAFT_KEY,JSON.stringify({base:state.sha,data:state.data})); }catch(e){}
   render();
 }
 
+async function publish(){
+  if(!state.admin||!state.dirty) return;
+  const btn=$('publish'); btn.disabled=true; btn.textContent='Publication…';
+  try{
+    state.data.updated=new Date().toISOString();
+    const body={
+      message:'Mise à jour du stock',
+      content:toB64(JSON.stringify(state.data,null,2)+'\n'),
+      branch:state.cfg.branch||'main'
+    };
+    if(state.sha) body.sha=state.sha;
+    const r=await gh(state.cfg,'/contents/stock.json',{method:'PUT',body:JSON.stringify(body)});
+    if(r.status===409||r.status===422) throw new Error('conflit');
+    if(r.status===401) throw new Error('auth');
+    if(r.status===403||r.status===404) throw new Error('write');
+    if(!r.ok) throw new Error('HTTP '+r.status);
+    const j=await r.json();
+    state.sha=j.content.sha; state.dirty=false;
+    try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
+    toast('Publié ✓ Visible par les étudiants dans environ 1 minute.');
+  }catch(e){
+    toast('Échec de la publication : '+errMsg(e));
+  }finally{
+    btn.textContent='Publier'; render();
+  }
+}
+
+/* ---------- affichage ---------- */
 function status(it){
   const c=CATS[it.category]; const q=Number(it.quantity)||0;
   const low=(it.low!==undefined&&it.low!==''&&it.low!==null)?Number(it.low):c.low;
@@ -198,20 +303,18 @@ function dimsText(it){
 }
 
 function render(){
-  // onglets
   $('tabs').innerHTML=Object.entries(CATS).map(([k,c])=>
     `<button class="tab ${k===state.cat?'active':''}" data-cat="${k}">${c.label}</button>`).join('');
-  // dates
   $('updated').textContent=state.data.updated?('Mis à jour le '+new Date(state.data.updated).toLocaleDateString('fr-FR')):'';
-  $('draft').classList.toggle('show',state.fromDraft);
+  $('draft').classList.toggle('show',state.admin&&state.dirty);
+  $('publish').disabled=!state.dirty;
+  $('metaLeft').innerHTML=state.admin?'Connecté en gestionnaire':'<a href="#" id="loginLink">Connexion gestionnaire</a>';
 
   const inCat=state.data.items.filter(i=>i.category===state.cat);
-  // filtre matériau
   const mats=[...new Set(inCat.map(i=>i.material).filter(Boolean))].sort();
   const sel=$('material');
   sel.innerHTML='<option value="">Tous les matériaux</option>'+mats.map(m=>`<option ${m===state.material?'selected':''}>${esc(m)}</option>`).join('');
   if(state.material&&!mats.includes(state.material)) state.material='';
-  // datalist
   $('materials').innerHTML=[...new Set(state.data.items.map(i=>i.material).filter(Boolean))].sort().map(m=>`<option value="${esc(m)}">`).join('');
 
   const q=state.q.trim().toLowerCase();
@@ -219,7 +322,7 @@ function render(){
     if(state.material&&i.material!==state.material) return false;
     if(state.onlyAvail&&status(i)==='out') return false;
     if(q){
-      const hay=[i.material,i.name,i.location,i.note,i.colorName].join(' ').toLowerCase();
+      const hay=[i.material,i.name,i.location,i.note].join(' ').toLowerCase();
       if(!hay.includes(q)) return false;
     }
     return true;
@@ -241,8 +344,8 @@ function render(){
         <div class="qty"><b>${fmt(it.quantity||0)} ${c.unit}</b><span class="badge ${st}">${LABEL[st]}</span></div>
         ${it.category!=='plaque'?`<div class="bar"><i class="${st}" style="width:${pct}%"></i></div>`:''}
         <div class="actions only-admin">
-          <button class="small" data-act="minus" data-id="${esc(it.id)}">− ${c.step}</button>
-          <button class="small" data-act="plus" data-id="${esc(it.id)}">+ ${c.step}</button>
+          <button class="small" data-act="minus" data-id="${esc(it.id)}">− ${fmt(packOf(it))}</button>
+          <button class="small" data-act="plus" data-id="${esc(it.id)}">+ ${fmt(packOf(it))}</button>
           <button class="small" data-act="edit" data-id="${esc(it.id)}">Modifier</button>
           <button class="small danger" data-act="del" data-id="${esc(it.id)}">Suppr.</button>
         </div>
@@ -259,21 +362,18 @@ $('tabs').addEventListener('click',e=>{
 $('q').addEventListener('input',e=>{state.q=e.target.value;render();});
 $('material').addEventListener('change',e=>{state.material=e.target.value;render();});
 $('onlyAvail').addEventListener('change',e=>{state.onlyAvail=e.target.checked;render();});
-$('toggleAdmin').addEventListener('click',e=>{
-  e.preventDefault(); state.admin=!state.admin;
-  document.body.classList.toggle('admin',state.admin);
-  e.target.textContent=state.admin?'Quitter le mode gestionnaire':'Mode gestionnaire';
-});
+
 $('discardDraft').addEventListener('click',()=>{
-  if(!confirm('Abandonner toutes les modifications locales ?')) return;
+  if(!confirm('Abandonner toutes les modifications non publiées ?')) return;
   try{localStorage.removeItem(DRAFT_KEY);}catch(e){}
-  state.fromDraft=false; load();
+  load();
 });
 
 $('list').addEventListener('click',e=>{
+  if(!state.admin) return;
   const b=e.target.closest('[data-act]'); if(!b) return;
   const it=state.data.items.find(i=>i.id===b.dataset.id); if(!it) return;
-  const step=CATS[it.category].step;
+  const step=packOf(it);
   if(b.dataset.act==='minus'){ it.quantity=Math.max(0,(Number(it.quantity)||0)-step); saveDraft(); }
   if(b.dataset.act==='plus'){ it.quantity=(Number(it.quantity)||0)+step; saveDraft(); }
   if(b.dataset.act==='edit') openDialog(it);
@@ -284,12 +384,63 @@ $('list').addEventListener('click',e=>{
   }
 });
 
-/* ---------- formulaire ---------- */
+$('publish').addEventListener('click',publish);
+$('logout').addEventListener('click',()=>{
+  if(state.dirty&&!confirm('Des modifications ne sont pas publiées. Se déconnecter et les perdre ?')) return;
+  try{localStorage.removeItem(CFG_KEY);localStorage.removeItem(DRAFT_KEY);}catch(e){}
+  load();
+});
+
+/* ---------- connexion gestionnaire ---------- */
+const ghForm=$('ghForm');
+function guessRepo(){
+  const h=location.hostname, p=location.pathname.split('/')[1];
+  return (h.endsWith('.github.io')&&p)?h.split('.')[0]+'/'+p:'';
+}
+function openGh(){
+  const c=getCfg()||{};
+  ghForm.repo.value=c.repo||guessRepo();
+  ghForm.branch.value=c.branch||'main';
+  ghForm.token.value='';
+  $('ghErr').style.display='none';
+  $('dlgGh').showModal();
+}
+$('metaLeft').addEventListener('click',e=>{
+  if(e.target.id==='loginLink'){ e.preventDefault(); openGh(); }
+});
+$('ghCancel').addEventListener('click',()=>$('dlgGh').close());
+ghForm.addEventListener('submit',async e=>{
+  e.preventDefault();
+  const cfg={repo:ghForm.repo.value.trim(),branch:ghForm.branch.value.trim()||'main',token:ghForm.token.value.trim()};
+  const err=$('ghErr'); const ok=$('ghOk');
+  ok.disabled=true; ok.textContent='Vérification…'; err.style.display='none';
+  try{
+    const rr=await gh(cfg,'');
+    if(rr.status===401||rr.status===403) throw new Error('auth');
+    if(rr.status===404) throw new Error('notfound');
+    if(!rr.ok) throw new Error('HTTP '+rr.status);
+    const info=await rr.json();
+    if(info.permissions&&info.permissions.push===false) throw new Error('write');
+    await fetchRemote(cfg);
+    localStorage.setItem(CFG_KEY,JSON.stringify(cfg));
+    $('dlgGh').close();
+    await load();
+    toast('Connecté. Tu peux modifier le stock puis cliquer sur Publier.');
+  }catch(ex){
+    err.textContent=errMsg(ex); err.style.display='block';
+  }finally{
+    ok.disabled=false; ok.textContent='Se connecter';
+  }
+});
+
+/* ---------- fiche article ---------- */
 const form=$('form');
 function syncForm(){
   const cat=form.category.value;
   $('qtyLabel').textContent=`Quantité (${CATS[cat].unit})`;
   $('dims').style.display=cat==='plaque'?'grid':'none';
+  $('packwrap').style.display=cat==='plaque'?'none':'grid';
+  $('packUnit').textContent=CATS[cat].unit;
   $('color2wrap').style.display=form.bicolor.checked?'grid':'none';
 }
 form.category.addEventListener('change',syncForm);
@@ -307,6 +458,7 @@ function openDialog(it){
   form.color2.value=it?.color2||'#ffffff';
   form.quantity.value=it?.quantity??'';
   form.low.value=it?.low??'';
+  form.pack.value=it?.pack??'';
   form.width.value=it?.width??'';
   form.height.value=it?.height??'';
   form.thickness.value=it?.thickness??'';
@@ -317,7 +469,7 @@ function openDialog(it){
 }
 $('add').addEventListener('click',()=>openDialog(null));
 $('cancel').addEventListener('click',()=>$('dlg').close());
-form.addEventListener('submit',e=>{
+form.addEventListener('submit',()=>{
   const num=v=>v===''?undefined:Number(v);
   const obj={
     id:state.editId||('i'+Date.now().toString(36)+Math.random().toString(36).slice(2,5)),
@@ -333,32 +485,14 @@ form.addEventListener('submit',e=>{
   };
   if(obj.category==='plaque'){
     obj.width=num(form.width.value); obj.height=num(form.height.value); obj.thickness=num(form.thickness.value);
+  }else{
+    obj.pack=num(form.pack.value);
   }
   const clean=JSON.parse(JSON.stringify(obj)); // retire les undefined
   const idx=state.data.items.findIndex(i=>i.id===clean.id);
   if(idx>=0) state.data.items[idx]=clean; else state.data.items.push(clean);
   state.cat=clean.category;
   saveDraft();
-});
-
-/* ---------- export / import ---------- */
-$('export').addEventListener('click',()=>{
-  state.data.updated=new Date().toISOString();
-  const blob=new Blob([JSON.stringify(state.data,null,2)],{type:'application/json'});
-  const a=document.createElement('a');
-  a.href=URL.createObjectURL(blob); a.download='stock.json'; a.click();
-  setTimeout(()=>URL.revokeObjectURL(a.href),1000);
-  alert('stock.json téléchargé.\nRemplace le fichier dans ton dépôt GitHub (Add file → Upload files) pour publier la mise à jour.');
-});
-$('import').addEventListener('click',()=>$('file').click());
-$('file').addEventListener('change',async e=>{
-  const f=e.target.files[0]; if(!f) return;
-  try{
-    const j=JSON.parse(await f.text());
-    if(!Array.isArray(j.items)) throw new Error('format');
-    state.data=j; saveDraft();
-  }catch(err){ alert('Fichier invalide.'); }
-  e.target.value='';
 });
 
 if('serviceWorker' in navigator){ navigator.serviceWorker.register('sw.js').catch(()=>{}); }

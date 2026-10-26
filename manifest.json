@@ -2,6 +2,7 @@
   "name": "Stock FabLab Clunisois",
   "short_name": "Stock FabLab",
   "description": "Consultation du stock de filaments, résines et plaques du FabLab",
+  "id": "fablab-stock-matière",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",

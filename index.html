@@ -9,25 +9,34 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <title>Stock FabLab Clunisois</title>
 <style>
-  :root{
-    --bg:#f4f6f9; --card:#fff; --text:#1c2430; --muted:#6a7686; --line:#e1e6ee;
-    --accent:#1f6feb; --ok:#1a9a52; --low:#d98a00; --out:#d23b3b;
-  }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#10151c; --card:#19212b; --text:#e8edf3; --muted:#92a0b2; --line:#2a3544; --accent:#58a6ff; }
-  }
+  :root{--ok:#1a9a52;--low:#d98a00;--out:#d23b3b}
+  :root,:root[data-mode=light]{color-scheme:light;--bg:#f4f6f9;--card:#fff;--text:#1c2430;--muted:#6a7686;--line:#e1e6ee;
+    --accent:#1f6feb;--on-accent:#fff;--head:#1f6feb;--on-head:#fff;--hi:#f2994a}
+  :root[data-mode=dark]{color-scheme:dark;--bg:#10151c;--card:#19212b;--text:#e8edf3;--muted:#92a0b2;--line:#2a3544;
+    --accent:#58a6ff;--on-accent:#0b1220;--head:#16263f;--on-head:#fff;--hi:#f2994a}
+  /* Arts et Métiers : violet #80276C et orange #FFA300 (charte graphique 2023) */
+  :root[data-palette=am][data-mode=light]{--accent:#80276c;--on-accent:#fff;--head:#80276c;--on-head:#fff;--hi:#ffa300}
+  :root[data-palette=am][data-mode=dark]{--accent:#e08acb;--on-accent:#1a0a16;--head:#3a1632;--on-head:#fff;--hi:#ffa300}
+  :root[data-palette=foret][data-mode=light]{--accent:#1a7f4b;--on-accent:#fff;--head:#1a7f4b;--on-head:#fff;--hi:#f2c94c}
+  :root[data-palette=foret][data-mode=dark]{--accent:#4cc38a;--on-accent:#07140d;--head:#12301f;--on-head:#fff;--hi:#f2c94c}
+  :root[data-palette=atelier][data-mode=light]{--accent:#d9480f;--on-accent:#fff;--head:#222831;--on-head:#fff;--hi:#e8590c}
+  :root[data-palette=atelier][data-mode=dark]{--accent:#ff9a5c;--on-accent:#1a0d04;--head:#14181d;--on-head:#fff;--hi:#e8590c}
   *{box-sizing:border-box}
   body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:var(--bg);color:var(--text);padding-bottom:84px}
-  header{background:var(--accent);color:#fff;padding:14px 16px 10px;padding-top:max(14px,env(safe-area-inset-top))}
+  header{background:var(--head);color:var(--on-head);border-bottom:4px solid var(--hi);padding:14px 16px 10px;padding-top:max(14px,env(safe-area-inset-top))}
+  .top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+  .themebtn{border:0;background:rgba(255,255,255,.18);color:var(--on-head);width:38px;height:38px;border-radius:10px;font-size:1.1rem;cursor:pointer;flex:none}
   header h1{margin:0;font-size:1.15rem}
   header small{opacity:.85}
   .tabs{display:flex;gap:6px;margin-top:10px}
-  .tab{flex:1;border:0;background:rgba(255,255,255,.18);color:#fff;padding:9px 4px;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer}
-  .tab.active{background:#fff;color:var(--accent)}
+  .tab{flex:1;border:0;background:rgba(255,255,255,.18);color:var(--on-head);padding:9px 4px;border-radius:10px;font-size:.9rem;font-weight:600;cursor:pointer}
+  .tab.active{background:var(--on-head);color:var(--head)}
   .tools{padding:12px 16px 0;display:grid;gap:8px}
   .tools input[type=search],.tools select{width:100%;padding:11px 12px;border:1px solid var(--line);border-radius:10px;background:var(--card);color:var(--text);font-size:1rem}
   .row{display:flex;gap:8px;align-items:center}
-  .row select{flex:1;min-width:0}
+  .row{flex-wrap:wrap}
+  .row select{flex:1 1 140px;min-width:0;font-size:.92rem;padding-right:4px}
+  .row label{flex-basis:100%}
   .row label{display:flex;gap:6px;align-items:center;color:var(--muted);font-size:.9rem}
   .count{padding:8px 16px 0;color:var(--muted);font-size:.85rem}
   .grid{display:grid;gap:10px;padding:10px 16px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
@@ -53,7 +62,7 @@
   footer .meta a{color:inherit}
   .admin-bar{display:none;gap:6px;flex-wrap:wrap}
   body.admin .admin-bar{display:flex}
-  .btn{border:0;background:var(--accent);color:#fff;border-radius:10px;padding:9px 14px;font-weight:600;font-size:.9rem;cursor:pointer}
+  .btn{border:0;background:var(--accent);color:var(--on-accent);border-radius:10px;padding:9px 14px;font-weight:600;font-size:.9rem;cursor:pointer}
   .btn.ghost{background:transparent;color:var(--accent);border:1px solid var(--accent)}
   .btn:disabled{opacity:.45;cursor:default}
   .only-admin{display:none}
@@ -76,12 +85,54 @@
   form.edit .three{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
   form.edit .check{display:flex;align-items:center;gap:8px;color:var(--text)}
   form.edit .check input{width:auto}
+  .palettes{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+  .pal{display:flex;align-items:center;gap:8px;border:2px solid var(--line);background:var(--bg);color:var(--text);border-radius:12px;padding:8px;font-size:.85rem;cursor:pointer;text-align:left}
+  .pal.sel{border-color:var(--accent)}
+  .dot{width:26px;height:26px;border-radius:50%;flex:none;border:1px solid var(--line)}
+  .seg{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+  .seg button{border:1px solid var(--line);background:var(--bg);color:var(--text);border-radius:10px;padding:9px;font-size:.9rem;cursor:pointer}
+  .seg button.sel{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
   .dlg-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:6px}
 </style>
+<script>
+const THEME_KEY='fablab-theme';
+const PAL={fablab:{n:'Bleu FabLab',a:'#1f6feb',h:'#f2994a'},am:{n:'Arts et Métiers',a:'#80276c',h:'#ffa300'},
+  foret:{n:'Forêt',a:'#1a7f4b',h:'#f2c94c'},atelier:{n:'Atelier',a:'#222831',h:'#e8590c'},custom:{n:'Personnalisé',a:'#1f6feb',h:'#1f6feb'}};
+function getTheme(){
+  try{const t=JSON.parse(localStorage.getItem(THEME_KEY));
+    if(t&&PAL[t.palette]) return {palette:t.palette,mode:['auto','light','dark'].includes(t.mode)?t.mode:'auto',custom:/^#[0-9a-f]{6}$/i.test(t.custom)?t.custom:'#1f6feb'};
+  }catch(e){}
+  return {palette:'fablab',mode:'auto',custom:'#1f6feb'};
+}
+function setTheme(t){ try{localStorage.setItem(THEME_KEY,JSON.stringify(t));}catch(e){} applyTheme(); }
+const hex2rgb=h=>[1,3,5].map(i=>parseInt(h.slice(i,i+2),16));
+const rgb2hex=a=>'#'+a.map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');
+const mix=(a,b,p)=>{const x=hex2rgb(a),y=hex2rgb(b);return rgb2hex(x.map((v,i)=>v*(1-p)+y[i]*p));};
+const lumOf=h=>{const [r,g,b]=hex2rgb(h).map(v=>{v/=255;return v<=.03928?v/12.92:Math.pow((v+.055)/1.055,2.4);});return .2126*r+.7152*g+.0722*b;};
+const onColor=h=>lumOf(h)>0.4?'#111111':'#ffffff';
+function applyTheme(){
+  const t=getTheme(), root=document.documentElement;
+  const dark=t.mode==='dark'||(t.mode==='auto'&&window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches);
+  root.dataset.mode=dark?'dark':'light'; root.dataset.palette=t.palette;
+  ['--accent','--on-accent','--head','--on-head','--hi'].forEach(p=>root.style.removeProperty(p));
+  if(t.palette==='custom'){
+    const c=t.custom, acc=dark?mix(c,'#ffffff',0.35):c, head=dark?mix(c,'#10151c',0.6):c;
+    root.style.setProperty('--accent',acc); root.style.setProperty('--on-accent',onColor(acc));
+    root.style.setProperty('--head',head);  root.style.setProperty('--on-head',onColor(head));
+    root.style.setProperty('--hi',acc);
+  }
+  const m=document.querySelector('meta[name=theme-color]');
+  if(m) m.content=getComputedStyle(root).getPropertyValue('--head').trim()||'#1f6feb';
+}
+applyTheme();
+if(window.matchMedia){ const mq=matchMedia('(prefers-color-scheme: dark)');
+  const h=()=>{ if(getTheme().mode==='auto') applyTheme(); };
+  if(mq.addEventListener) mq.addEventListener('change',h); }
+</script>
 </head>
 <body>
 <header>
-  <h1>Stock du FabLab Clunisois</h1>
+  <div class="top"><h1>Stock du FabLab Clunisois</h1><button id="themeBtn" class="themebtn" type="button" aria-label="Changer le thème" title="Apparence">🎨</button></div>
   <small id="updated">Chargement…</small>
   <div class="tabs" id="tabs"></div>
 </header>
@@ -165,6 +216,16 @@
       <button type="button" class="btn ghost" id="ghCancel">Annuler</button>
       <button class="btn" id="ghOk">Se connecter</button>
     </div>
+  </form>
+</dialog>
+<!-- Apparence -->
+<dialog id="dlgTheme">
+  <form class="edit" method="dialog">
+    <h2>Apparence</h2>
+    <div class="palettes" id="palettes"></div>
+    <label id="customWrap" style="display:none">Couleur principale <input type="color" id="customColor" value="#1f6feb"></label>
+    <div class="seg" id="modes"></div>
+    <div class="dlg-actions"><button class="btn">Fermer</button></div>
   </form>
 </dialog>
 <datalist id="materials"></datalist>
@@ -451,6 +512,33 @@ ghForm.addEventListener('submit',async e=>{
   }finally{
     ok.disabled=false; ok.textContent='Se connecter';
   }
+});
+
+/* ---------- apparence ---------- */
+function renderThemeDlg(){
+  const t=getTheme();
+  $('palettes').innerHTML=Object.entries(PAL).map(([k,p])=>{
+    const a=k==='custom'?t.custom:p.a, h=k==='custom'?t.custom:p.h;
+    return `<button type="button" class="pal ${k===t.palette?'sel':''}" data-pal="${k}"><span class="dot" style="background:linear-gradient(135deg,${a} 50%,${h} 50%)"></span>${p.n}</button>`;
+  }).join('');
+  $('customWrap').style.display=t.palette==='custom'?'grid':'none';
+  $('customColor').value=t.custom;
+  $('modes').innerHTML=[['auto','Auto'],['light','Clair'],['dark','Sombre']]
+    .map(([k,l])=>`<button type="button" class="${k===t.mode?'sel':''}" data-mode="${k}">${l}</button>`).join('');
+}
+$('themeBtn').addEventListener('click',()=>{ renderThemeDlg(); $('dlgTheme').showModal(); });
+$('palettes').addEventListener('click',e=>{
+  const b=e.target.closest('[data-pal]'); if(!b) return;
+  const t=getTheme(); t.palette=b.dataset.pal; setTheme(t); renderThemeDlg();
+});
+$('modes').addEventListener('click',e=>{
+  const b=e.target.closest('[data-mode]'); if(!b) return;
+  const t=getTheme(); t.mode=b.dataset.mode; setTheme(t); renderThemeDlg();
+});
+$('customColor').addEventListener('input',e=>{
+  const t=getTheme(); t.palette='custom'; t.custom=e.target.value; setTheme(t);
+  document.querySelectorAll('.pal').forEach(b=>b.classList.toggle('sel',b.dataset.pal==='custom'));
+  const d=document.querySelector('[data-pal=custom] .dot'); if(d) d.style.background=`linear-gradient(135deg,${t.custom} 50%,${t.custom} 50%)`;
 });
 
 /* ---------- fiche article ---------- */

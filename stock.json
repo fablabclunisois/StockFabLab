@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:03:25.211Z",
+  "updated": "2026-10-27T13:07:50.592Z",
   "items": [
     {
       "id": "f002",
@@ -1604,6 +1604,16 @@
       "quantity": 500,
       "location": "Armoire à résine",
       "pack": 1000
+    },
+    {
+      "id": "imvqpam8mzq6",
+      "category": "resine",
+      "material": "Alcool Isopropylique",
+      "colorName": "Transparent",
+      "color": "#ff0000",
+      "quantity": 10000,
+      "location": "Armoire sécurisée",
+      "pack": 5000
     }
   ]
 }

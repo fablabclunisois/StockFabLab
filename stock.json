@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:56:19.806Z",
+  "updated": "2026-10-27T13:57:51.867Z",
   "items": [
     {
       "id": "f002",
@@ -916,6 +916,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 1,
+      "low": 2,
       "width": 570,
       "height": 385,
       "thickness": 3
@@ -926,6 +927,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 3,
+      "low": 2,
       "width": 600,
       "height": 435,
       "thickness": 3
@@ -966,6 +968,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 2,
+      "low": 2,
       "width": 618,
       "height": 435,
       "thickness": 3
@@ -976,6 +979,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 7,
+      "low": 2,
       "width": 620,
       "height": 325,
       "thickness": 3
@@ -1046,6 +1050,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 1,
+      "low": 2,
       "width": 705,
       "height": 600,
       "thickness": 3
@@ -1086,6 +1091,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 3,
+      "low": 2,
       "width": 800,
       "height": 600,
       "thickness": 3
@@ -1096,6 +1102,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 7,
+      "low": 2,
       "width": 955,
       "height": 562,
       "thickness": 3
@@ -1146,6 +1153,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 5,
+      "low": 2,
       "width": 957,
       "height": 563,
       "thickness": 3
@@ -1156,6 +1164,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 1,
+      "low": 2,
       "width": 960,
       "height": 340,
       "thickness": 3
@@ -1196,6 +1205,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 3,
+      "low": 2,
       "width": 1000,
       "height": 600,
       "thickness": 3
@@ -1206,6 +1216,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 6,
+      "low": 2,
       "width": 1000,
       "height": 615,
       "thickness": 3
@@ -1216,6 +1227,7 @@
       "material": "MDF",
       "color": "#a98467",
       "quantity": 3,
+      "low": 2,
       "width": 1223,
       "height": 608,
       "thickness": 3

@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-23T14:06:19.952Z",
+  "updated": "2026-10-27T13:03:25.211Z",
   "items": [
     {
       "id": "f002",
@@ -374,24 +374,6 @@
       "diameter": 2.85,
       "quantity": 750,
       "pack": 750
-    },
-    {
-      "id": "r001",
-      "category": "resine",
-      "material": "Castable",
-      "color": "#9aa0a6",
-      "quantity": 0,
-      "pack": 1000,
-      "note": "Quantité à renseigner"
-    },
-    {
-      "id": "r002",
-      "category": "resine",
-      "material": "Draft",
-      "color": "#9aa0a6",
-      "quantity": 0,
-      "pack": 1000,
-      "note": "Quantité à renseigner"
     },
     {
       "id": "p001",
@@ -1556,6 +1538,72 @@
       "quantity": 750,
       "pack": 750,
       "diameter": 2.85
+    },
+    {
+      "id": "imvqovr74otb",
+      "category": "resine",
+      "material": "Draft V2",
+      "name": "FormLab",
+      "colorName": "Gris",
+      "color": "#888888",
+      "quantity": 1000,
+      "location": "Armoire résine",
+      "pack": 1000
+    },
+    {
+      "id": "imvqoydpxlhf",
+      "category": "resine",
+      "material": "Castable wax V1",
+      "name": "FormLab",
+      "colorName": "Violet",
+      "color": "#5100ff",
+      "quantity": 1000,
+      "location": "Armoire à résine",
+      "pack": 1000
+    },
+    {
+      "id": "imvqoznsu716",
+      "category": "resine",
+      "material": "Castable wax 40 V1",
+      "name": "FormLab",
+      "colorName": "Violet",
+      "color": "#4800ff",
+      "quantity": 500,
+      "location": "Armoire à résine",
+      "pack": 1000
+    },
+    {
+      "id": "imvqp0r1ia9c",
+      "category": "resine",
+      "material": "Clear V4",
+      "name": "FormLab",
+      "colorName": "Transparent",
+      "color": "#ffffff",
+      "quantity": 1000,
+      "location": "Armoire à résine",
+      "pack": 1000
+    },
+    {
+      "id": "imvqp3s0npaa",
+      "category": "resine",
+      "material": "Black V4",
+      "name": "FormLab",
+      "colorName": "Noir",
+      "color": "#000000",
+      "quantity": 500,
+      "location": "Armoire à résine",
+      "pack": 1000
+    },
+    {
+      "id": "imvqp4vwnqh9",
+      "category": "resine",
+      "material": "Clear",
+      "name": "FormLab",
+      "colorName": "Transparent",
+      "color": "#ffffff",
+      "quantity": 500,
+      "location": "Armoire à résine",
+      "pack": 1000
     }
   ]
 }

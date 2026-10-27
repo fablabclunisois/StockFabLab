@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:45:48.539Z",
+  "updated": "2026-10-27T13:48:04.959Z",
   "items": [
     {
       "id": "f002",
@@ -18,122 +18,144 @@
       "id": "f004",
       "category": "filament",
       "material": "ABS",
+      "name": "EmotionTech",
       "colorName": "Gris",
       "color": "#8c9199",
-      "name": "EmotionTech",
-      "diameter": 2.85,
       "quantity": 2000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f005",
       "category": "filament",
       "material": "ABS",
+      "name": "EmotionTech",
       "colorName": "Bronze",
       "color": "#a8743c",
-      "name": "EmotionTech",
-      "diameter": 2.85,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f006",
       "category": "filament",
       "material": "ABS",
+      "name": "EmotionTech",
       "colorName": "Fusain",
       "color": "#34373b",
-      "name": "EmotionTech",
-      "diameter": 2.85,
       "quantity": 1000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f007",
       "category": "filament",
       "material": "ABS",
+      "name": "EmotionTech",
       "colorName": "Rouge",
       "color": "#d62828",
-      "name": "EmotionTech",
-      "diameter": 2.85,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f008",
       "category": "filament",
       "material": "ABS",
+      "name": "EmotionTech",
       "colorName": "Vert pomme",
       "color": "#8bc34a",
-      "name": "EmotionTech",
-      "diameter": 2.85,
       "quantity": 1000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f009",
       "category": "filament",
       "material": "ABS",
+      "name": "EmotionTech",
       "colorName": "Argent",
       "color": "#c3c7cc",
-      "name": "EmotionTech",
-      "diameter": 2.85,
       "quantity": 5000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f010",
       "category": "filament",
       "material": "ABS",
+      "name": "NéoFil",
       "colorName": "Noir",
       "color": "#1f1f1f",
-      "name": "NéoFil",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f011",
       "category": "filament",
       "material": "ABS",
+      "name": "PolyLite",
       "colorName": "Vert",
       "color": "#2e9e4f",
-      "name": "PolyLite",
-      "diameter": 2.85,
       "quantity": 2000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f012",
       "category": "filament",
       "material": "ABS",
+      "name": "PolyLite",
       "colorName": "Rouge",
       "color": "#d62828",
-      "name": "PolyLite",
-      "diameter": 2.85,
       "quantity": 2000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f013",
       "category": "filament",
       "material": "ABS",
+      "name": "Ultimaker",
       "colorName": "Orange",
       "color": "#f57c00",
-      "name": "Ultimaker",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f015",
       "category": "filament",
       "material": "ABS",
+      "name": "Ultimaker",
       "colorName": "Noir",
       "color": "#1f1f1f",
-      "name": "Ultimaker",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f018",

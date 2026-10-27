@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:51:43.332Z",
+  "updated": "2026-10-27T13:55:06.784Z",
   "items": [
     {
       "id": "f002",
@@ -187,12 +187,14 @@
       "id": "f021",
       "category": "filament",
       "material": "ASA",
+      "name": "Nanovia",
       "colorName": "Noir",
       "color": "#1f1f1f",
-      "name": "Nanovia",
-      "diameter": 1.75,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère B, Plateau 4",
+      "pack": 750,
+      "diameter": 1.75
     },
     {
       "id": "f023",
@@ -1576,6 +1578,8 @@
       "colorName": "Blanc",
       "color": "#ffffff",
       "quantity": 9000,
+      "low": 1000,
+      "location": "Etagère B, Plateau 4",
       "pack": 3000
     },
     {

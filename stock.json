@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:50:36.889Z",
+  "updated": "2026-10-27T13:51:26.859Z",
   "items": [
     {
       "id": "f002",
@@ -320,7 +320,7 @@
       "color": "#1f1f1f",
       "quantity": 5000,
       "low": 1000,
-      "location": "Etagère B, Plateau 3",
+      "location": "Etagère A, Plateau 3",
       "pack": 5000,
       "diameter": 1.75
     },
@@ -415,12 +415,14 @@
       "id": "f048",
       "category": "filament",
       "material": "SR-30",
+      "name": "Stratasys",
       "colorName": "Naturelle",
       "color": "#e9dfc4",
-      "name": "Stratasys",
-      "diameter": 1.75,
       "quantity": 2250,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère A, Plateau 4",
+      "pack": 750,
+      "diameter": 1.75
     },
     {
       "id": "f049",

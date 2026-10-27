@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:19:12.613Z",
+  "updated": "2026-10-27T13:45:48.539Z",
   "items": [
     {
       "id": "f002",
@@ -9,6 +9,8 @@
       "colorName": "Naturelle",
       "color": "#404040",
       "quantity": 1500,
+      "low": 1000,
+      "location": "Etagère A, Plateau 3",
       "pack": 500,
       "diameter": 2.85
     },
@@ -280,56 +282,66 @@
       "id": "f038",
       "category": "filament",
       "material": "PLA",
+      "name": "Amazon Basics",
       "colorName": "Gris foncé",
       "color": "#4b5057",
-      "name": "Amazon Basics",
-      "diameter": 2.85,
       "quantity": 1000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère A, Plateau 3",
+      "pack": 1000,
+      "diameter": 2.85
     },
     {
       "id": "f042",
       "category": "filament",
       "material": "PLA",
+      "name": "Ultimaker",
       "colorName": "Magenta",
       "color": "#c2185b",
-      "name": "Ultimaker",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère A, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f043",
       "category": "filament",
       "material": "PLA",
+      "name": "Ultimaker",
       "colorName": "Blanc perle",
       "color": "#f0eee8",
-      "name": "Ultimaker",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère A, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f044",
       "category": "filament",
       "material": "PLA",
+      "name": "Ultimaker",
       "colorName": "Bleu",
       "color": "#1e6fd9",
-      "name": "Ultimaker",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère A, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f045",
       "category": "filament",
       "material": "PLA",
+      "name": "Ultimaker",
       "colorName": "Rouge",
       "color": "#d62828",
-      "name": "Ultimaker",
-      "diameter": 2.85,
       "quantity": 750,
-      "pack": 750
+      "low": 1000,
+      "location": "Etagère A, Plateau 3",
+      "pack": 750,
+      "diameter": 2.85
     },
     {
       "id": "f046",
@@ -1526,7 +1538,7 @@
       "color": "#888888",
       "quantity": 1000,
       "low": 1000,
-      "location": "Etagère A, Plateau 4",
+      "location": "Etagère A, Plateau 3",
       "pack": 1000,
       "diameter": 2.85
     },

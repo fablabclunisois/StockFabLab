@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:48:04.959Z",
+  "updated": "2026-10-27T13:49:59.302Z",
   "items": [
     {
       "id": "f002",
@@ -194,12 +194,14 @@
       "id": "f023",
       "category": "filament",
       "material": "PLA",
+      "name": "PolyLite",
       "colorName": "Gris",
       "color": "#8c9199",
-      "name": "PolyLite",
-      "diameter": 1.75,
       "quantity": 1000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f029",
@@ -209,6 +211,8 @@
       "colorName": "Gris Fossile",
       "color": "#6e7175",
       "quantity": 1000,
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
       "pack": 1000,
       "diameter": 1.75
     },
@@ -216,89 +220,105 @@
       "id": "f030",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Gris",
       "color": "#8c9199",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 1000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f031",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Violet",
       "color": "#7e3fa8",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f032",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Jaune",
       "color": "#f2cf1d",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f033",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Blanc",
       "color": "#f7f7f5",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 4",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f034",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Noir",
       "color": "#1f1f1f",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f035",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Rouge",
       "color": "#d62828",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f036",
       "category": "filament",
       "material": "PLA",
+      "name": "Kexcelled",
       "colorName": "Vert",
       "color": "#2e9e4f",
-      "name": "Kexcelled",
-      "diameter": 1.75,
       "quantity": 3000,
-      "pack": 1000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 1000,
+      "diameter": 1.75
     },
     {
       "id": "f037",
       "category": "filament",
       "material": "PLA",
+      "name": "Elegoo",
       "colorName": "Noir",
       "color": "#1f1f1f",
-      "name": "Elegoo",
-      "diameter": 1.75,
       "quantity": 5000,
-      "pack": 5000
+      "low": 1000,
+      "location": "Etagère B, Plateau 3",
+      "pack": 5000,
+      "diameter": 1.75
     },
     {
       "id": "f038",

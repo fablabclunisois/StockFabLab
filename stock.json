@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:07:50.592Z",
+  "updated": "2026-10-27T13:13:28.226Z",
   "items": [
     {
       "id": "f002",
@@ -1548,6 +1548,7 @@
       "color": "#888888",
       "quantity": 1000,
       "location": "Armoire résine",
+      "note": "Reste de la Form2\nValeurs approximatives",
       "pack": 1000
     },
     {
@@ -1559,6 +1560,7 @@
       "color": "#5100ff",
       "quantity": 1000,
       "location": "Armoire à résine",
+      "note": "Reste de la Form2\nValeurs approximatives",
       "pack": 1000
     },
     {
@@ -1570,6 +1572,7 @@
       "color": "#4800ff",
       "quantity": 500,
       "location": "Armoire à résine",
+      "note": "Reste de la Form2\nValeurs approximatives",
       "pack": 1000
     },
     {
@@ -1581,6 +1584,7 @@
       "color": "#ffffff",
       "quantity": 1000,
       "location": "Armoire à résine",
+      "note": "Reste de la Form2\nValeurs approximatives",
       "pack": 1000
     },
     {
@@ -1592,6 +1596,7 @@
       "color": "#000000",
       "quantity": 500,
       "location": "Armoire à résine",
+      "note": "Reste de la Form2\nValeurs approximatives",
       "pack": 1000
     },
     {
@@ -1603,6 +1608,7 @@
       "color": "#ffffff",
       "quantity": 500,
       "location": "Armoire à résine",
+      "note": "Valeurs approximatives",
       "pack": 1000
     },
     {
@@ -1613,6 +1619,7 @@
       "color": "#ff0000",
       "quantity": 10000,
       "location": "Armoire sécurisée",
+      "note": "Valeurs approximatives",
       "pack": 5000
     }
   ]

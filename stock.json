@@ -1,5 +1,5 @@
 {
-  "updated": "2026-10-27T13:57:51.867Z",
+  "updated": "2026-11-04T15:09:26.010Z",
   "items": [
     {
       "id": "f002",
@@ -1707,6 +1707,32 @@
       "location": "Armoire sécurisée",
       "note": "Valeurs approximatives",
       "pack": 5000
+    },
+    {
+      "id": "imw294fj7vfe",
+      "category": "plaque",
+      "material": "Filtre ATMOS",
+      "color": "#000000",
+      "color2": "#ffffff",
+      "quantity": 2,
+      "low": 3,
+      "location": "Etagère B, niveau 7",
+      "width": 0,
+      "height": 0,
+      "thickness": 0
+    },
+    {
+      "id": "imw295jlz9s5",
+      "category": "plaque",
+      "material": "Pré filtre ATMOS",
+      "color": "#fafafa",
+      "color2": "#000000",
+      "quantity": 0,
+      "low": 3,
+      "location": "Etagère B, niveau 7",
+      "width": 0,
+      "height": 0,
+      "thickness": 0
     }
   ]
 }

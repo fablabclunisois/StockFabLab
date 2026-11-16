@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-04T15:09:26.010Z",
+  "updated": "2026-11-16T12:24:55.448Z",
   "items": [
     {
       "id": "f002",
@@ -203,7 +203,7 @@
       "name": "PolyLite",
       "colorName": "Gris",
       "color": "#8c9199",
-      "quantity": 1000,
+      "quantity": 0,
       "low": 1000,
       "location": "Etagère B, Plateau 3",
       "pack": 1000,

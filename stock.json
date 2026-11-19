@@ -1,5 +1,5 @@
 {
-  "updated": "2026-11-16T12:24:55.448Z",
+  "updated": "2026-11-19T11:47:06.869Z",
   "items": [
     {
       "id": "f002",
@@ -194,19 +194,6 @@
       "low": 1000,
       "location": "Etagère B, Plateau 4",
       "pack": 750,
-      "diameter": 1.75
-    },
-    {
-      "id": "f023",
-      "category": "filament",
-      "material": "PLA",
-      "name": "PolyLite",
-      "colorName": "Gris",
-      "color": "#8c9199",
-      "quantity": 0,
-      "low": 1000,
-      "location": "Etagère B, Plateau 3",
-      "pack": 1000,
       "diameter": 1.75
     },
     {
